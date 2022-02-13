@@ -34,6 +34,10 @@ class CoinMetrics():
                     df.time = df.time.apply(isoparse)
                 for col in [c for c in df.columns if c in metrics]:
                     df[col] = df[col].apply(type_map[metrics[col]["data_type"]])
+                for col in  [c for c in df.columns if "price" in c]:
+                    df[col] = df[col].apply(float)
+                for col in  [c for c in df.columns if "volume" in c]:
+                    df[col] = df[col].apply(float)
                 return df
 
             return wrapper
